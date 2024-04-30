@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="League.BL.Model.Speler">
+    <Position X="1.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACCAAAAAABAABAAgAAABABAAKAAAMAAEAAEAAAAAAI=</HashCode>
+      <FileName>Model\Speler.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Team" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="League.BL.Model.Team">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABEAAAAAACAAAIIAARAAAAJAAAAACAAAIAAAAAAA=</HashCode>
+      <FileName>Model\Team.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="_spelers" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="League.BL.Model.Transfer">
+    <Position X="6.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAgAEAAAQAAAQCAAAAAAAgAAAIEAACAAAAAAEAEA=</HashCode>
+      <FileName>Model\Transfer.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="NieuwTeam" />
+      <Property Name="OudTeam" />
+      <Property Name="Speler" />
+    </ShowAsAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

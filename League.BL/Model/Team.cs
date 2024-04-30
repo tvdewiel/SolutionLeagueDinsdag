@@ -44,11 +44,18 @@ namespace League.BL.Model
             if (speler==null) throw new SpelerException("VoegSpelerToe");
             if (_spelers.Contains(speler)) throw new SpelerException("VoegSpelerToe");
             _spelers.Add(speler);
-
+            if (speler.Team != this) speler.ZetTeam(this);
         }
         internal void VerwijderSpeler(Speler speler)
         {
-
+            if (speler == null) throw new SpelerException("VerwijderSpelerToe");
+            if (!_spelers.Contains(speler)) throw new SpelerException("VerwijderSpelerToe");
+            _spelers.Remove(speler);
+            if (speler.Team == this) speler.VerwijderTeam();
+        }
+        public bool HeeftSpeler(Speler speler)
+        {
+            return _spelers.Contains(speler);
         }
     }
 }

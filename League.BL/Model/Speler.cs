@@ -52,11 +52,22 @@ namespace League.BL.Model
             if ((rugnummer <= 0) || (rugnummer > 99)) throw new SpelerException("ZetRugnummer");
             Rugnummer = rugnummer;
         }
-        public void ZetTeam(Team team)
+        internal void ZetTeam(Team team)
         {
-            //TODO zetteam
+            if (team == null) throw new SpelerException("ZetTeam");
+            if (team == Team) throw new SpelerException("ZetTeam");
+            if (Team != null)
+            {
+                if (Team.HeeftSpeler(this)) Team.VerwijderSpeler(this);
+            }
+            if (!team.HeeftSpeler(this)) team.VoegSpelerToe(this);
+            Team = team;
         }
-
+        internal void VerwijderTeam()
+        {
+            if (Team.HeeftSpeler(this)) Team.VerwijderSpeler(this);
+            Team = null;
+        }
         public override bool Equals(object? obj)
         {
             return obj is Speler speler &&

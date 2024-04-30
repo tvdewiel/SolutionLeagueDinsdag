@@ -7,6 +7,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "League.BL", "League.BL\Leag
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "League.DL", "League.DL\League.DL.csproj", "{FE2CC197-FB74-407A-8753-653722F8AD99}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{7C24B7A7-79B4-4C7D-8766-B0B85E7C111D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProjectDomein", "TestProjectDomein\TestProjectDomein.csproj", "{832BA7F6-C509-44F6-81C1-56BD261555EE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{14784544-E699-465B-98D9-CE247B79D9B3}"
+	ProjectSection(SolutionItems) = preProject
+		DB_League.sql = DB_League.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,9 +30,16 @@ Global
 		{FE2CC197-FB74-407A-8753-653722F8AD99}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE2CC197-FB74-407A-8753-653722F8AD99}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE2CC197-FB74-407A-8753-653722F8AD99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{832BA7F6-C509-44F6-81C1-56BD261555EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{832BA7F6-C509-44F6-81C1-56BD261555EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{832BA7F6-C509-44F6-81C1-56BD261555EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{832BA7F6-C509-44F6-81C1-56BD261555EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{832BA7F6-C509-44F6-81C1-56BD261555EE} = {7C24B7A7-79B4-4C7D-8766-B0B85E7C111D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AC867468-F956-4E49-AA31-72CECF7FBBFF}
