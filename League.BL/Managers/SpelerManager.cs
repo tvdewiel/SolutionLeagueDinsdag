@@ -17,7 +17,7 @@ namespace League.BL.Managers
         {
             this.repo = repo;
         }
-        public Speler RegistreerSpeler(string naam,int? lengte,int? gewicht)
+        public Speler RegistreerSpeler(string naam, int? lengte, int? gewicht)
         {
             try
             {
@@ -29,10 +29,11 @@ namespace League.BL.Managers
                 }
                 else
                 {
-                    throw new SpelerManagerException("RegistreerSpeler - speler bestaat al");
+                    throw new ManagerException("RegistreerSpeler - speler bestaat al");
                 }
             }
-            catch(SpelerManagerException) { throw; }
-            catch(Exception ex) { throw new SpelerManagerException("RegistreerSpeler", ex); }
+            catch (ManagerException) { throw; }
+            catch (Exception ex) { throw new ManagerException("RegistreerSpeler", ex); }
+        }
     }
 }
