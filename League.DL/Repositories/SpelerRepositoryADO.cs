@@ -1,4 +1,5 @@
-﻿using League.BL.Interfaces;
+﻿using League.BL.DTO;
+using League.BL.Interfaces;
 using League.BL.Model;
 using League.DL.Exceptions;
 using System;
@@ -46,7 +47,6 @@ namespace League.DL.Repositories
                 }
             }
         }
-
         public Speler SchrijfSpelerInDB(Speler s)
         {
             string query = "INSERT INTO Speler(naam,lengte,gewicht) output INSERTED.ID VALUES(@naam,@lengte,@gewicht)";
@@ -66,6 +66,32 @@ namespace League.DL.Repositories
                     s.ZetId(newID); return s;
                 }
                 catch(Exception ex) { throw new ADORepositoryException("SchrijfSpelerinDB",ex); }
+            }
+        }
+        public IReadOnlyList<SpelerInfo> SelecteerSpelers(int? id, string naam)
+        {
+            string query = "SELECT t1.*,\r\n       case when t2.Stamnummer is null then null \r\n       else concat(t2.naam,' (',t2.Bijnaam,') - ',t2.Stamnummer)\r\n\t   end teamnaam\r\nFROM [Speler] t1 left join team t2 on t1.TeamId=t2.Stamnummer ";
+            if (id.HasValue) query += "WHERE id=@id";
+            else query += "WHERE t1.naam=@naam";
+            List<SpelerInfo> spelers= new List<SpelerInfo>();
+            using(SqlConnection connection = new SqlConnection(connectionString))
+            using(SqlCommand command = connection.CreateCommand())
+            {
+                command.CommandText = query;
+                if (id.HasValue) command.Parameters.AddWithValue("@id", id);
+                else command.Parameters.AddWithValue("@naam", naam);
+                connection.Open();
+                IDataReader reader=command.ExecuteReader();
+                while (reader.Read())
+                {
+                    string teamnaam = null;
+                    if (!reader.IsDBNull(reader.GetOrdinal("teamnaam"))) teamnaam = (string)reader["teamnaam"];
+                    //alle ander velden
+                    //SpelerInfo speler=new SpelerInfo()
+                    //spelers.Add(speler)
+                }
+                reader.Close();
+                return spelers;
             }
         }
     }

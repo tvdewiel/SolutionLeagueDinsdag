@@ -1,4 +1,5 @@
-﻿using League.BL.Exceptions;
+﻿using League.BL.DTO;
+using League.BL.Exceptions;
 using League.BL.Interfaces;
 using League.BL.Model;
 using System;
@@ -34,6 +35,15 @@ namespace League.BL.Managers
             }
             catch (ManagerException) { throw; }
             catch (Exception ex) { throw new ManagerException("RegistreerSpeler", ex); }
+        }
+        public IReadOnlyList<SpelerInfo> SelecteerSpelers(int? id,string naam)
+        {
+            if (id == null && string.IsNullOrWhiteSpace(naam)) throw new ManagerException("id en naam leeg");
+            try
+            {
+                return repo.SelecteerSpelers(id, naam);
+            }
+            catch(Exception ex) { throw new ManagerException("selecteerspelers", ex); }
         }
     }
 }
