@@ -72,23 +72,28 @@ namespace League.DL.Repositories
         {
             string query = "SELECT t1.*,\r\n       case when t2.Stamnummer is null then null \r\n       else concat(t2.naam,' (',t2.Bijnaam,') - ',t2.Stamnummer)\r\n\t   end teamnaam\r\nFROM [Speler] t1 left join team t2 on t1.TeamId=t2.Stamnummer ";
             if (id.HasValue) query += "WHERE id=@id";
-            else query += "WHERE t1.naam=@naam";
+            else query += "WHERE t1.naam like @naam";
             List<SpelerInfo> spelers= new List<SpelerInfo>();
             using(SqlConnection connection = new SqlConnection(connectionString))
             using(SqlCommand command = connection.CreateCommand())
             {
                 command.CommandText = query;
                 if (id.HasValue) command.Parameters.AddWithValue("@id", id);
-                else command.Parameters.AddWithValue("@naam", naam);
+                else command.Parameters.AddWithValue("@naam","%"+naam+"%");
                 connection.Open();
                 IDataReader reader=command.ExecuteReader();
                 while (reader.Read())
                 {
                     string teamnaam = null;
                     if (!reader.IsDBNull(reader.GetOrdinal("teamnaam"))) teamnaam = (string)reader["teamnaam"];
-                    //alle ander velden
-                    //SpelerInfo speler=new SpelerInfo()
-                    //spelers.Add(speler)
+                    int? lengte = null;
+                    if (!reader.IsDBNull(reader.GetOrdinal("lengte"))) lengte = (int?)reader["lengte"];
+                    int? gewicht = null;
+                    if (!reader.IsDBNull(reader.GetOrdinal("gewicht"))) gewicht = (int?)reader["gewicht"];
+                    int? rugnummer = null;
+                    if (!reader.IsDBNull(reader.GetOrdinal("rugnummer"))) rugnummer = (int?)reader["rugnummer"];
+                    SpelerInfo speler = new SpelerInfo((int)reader["id"], (string)reader["naam"],  rugnummer, lengte, gewicht, teamnaam);
+                    spelers.Add(speler);
                 }
                 reader.Close();
                 return spelers;
